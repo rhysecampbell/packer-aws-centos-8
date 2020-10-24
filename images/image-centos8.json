@@ -1,0 +1,35 @@
+{
+    "variables": {
+      "name": "centos_8_base",
+      "source_ami":"ami-0157b1e4eefd91fd7",
+      "access_key":"",
+      "secret_key":"",
+      "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+      "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+       "region":"us-west-2"
+    },
+    "builders": [{
+      "type": "amazon-ebs",
+      "ami_name": "{{user `name`}}",
+      "ami_regions": [
+            "eu-west-1",
+            "eu-west-2"
+      ], 
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "t2.medium",
+      "communicator": "ssh",
+      "ssh_username": "centos",
+      "run_tags":{"Name":"packer-image"}
+    }],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": ["sudo yum install -y nginx","sudo systemctl enable nginx", "sudo systemctl start nginx"]
+        },
+    	{
+            "type": "shell",
+            "script": "../scripts/setup.sh"
+    	}
+    ]
+}

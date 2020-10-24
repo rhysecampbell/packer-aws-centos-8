@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+exit
+
 # Install necessary dependencies
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 sudo apt-get -y -qq install curl wget git vim apt-transport-https ca-certificates
