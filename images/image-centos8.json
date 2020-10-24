@@ -12,7 +12,7 @@
       "type": "amazon-ebs",
       "ami_name": "{{user `name`}}",
       "ami_regions": [
-            "eu-west-1",
+            "eu-east-1",
             "eu-west-2"
       ], 
       "region": "{{user `region`}}",
